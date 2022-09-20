@@ -1,4 +1,9 @@
 local GameStats = game.Players.LocalPlayer.PlayerGui.GameGui.HUD.GameStats
+for i,v in pairs(GameStats:GetDescendants()) do
+    if v:IsA("TextLabel") then
+        v.Visible = true
+    end
+end
 local screen = Instance.new("ScreenGui", game.CoreGui)
 local Frame = Instance.new("Frame")
 local Horizontal = Instance.new("TextLabel")
