@@ -283,3 +283,48 @@ Timer.TextColor3 = Color3.fromRGB(255, 255, 255)
 Timer.TextScaled = true
 Timer.TextSize = 14.000
 Timer.TextWrapped = true
+
+local RS = game:GetService("RunService")
+	local FPS = 0
+	
+	function UpdateFPS()
+		FPS = FPS + 1
+	end
+	
+	RS.RenderStepped:Connect(UpdateFPS)
+	while wait(1) do
+		FPS.Text = FPS.." FPS"
+		FPS = 0
+	end
+
+game:GetService("RunService").RenderStepped:Connect(function()
+        if game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored ==true then
+            GameStats.Timer.TextColor3 = Color3.fromRGB(255,255,50)
+        else
+            GameStats.Timer.TextColor3 = Color3.fromRGB(255,255,255)
+        end
+        
+        game:GetService("RunService").RenderStepped:Connect(function ()
+        local p = game.Players.LocalPlayer
+        local curVelocity = p.Character.HumanoidRootPart.AssemblyLinearVelocity
+        local horizontalVelocity = (curVelocity.X^2 + curVelocity.Z^2)^0.5 
+        local verticalVelocity = curVelocity.Y
+        
+        Horizontal.Text = string.format("Horizontal: %.3f", horizontalVelocity)
+        Vertical.Text = string.format("Vertical: %.3f", game.Players.LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity.Y)
+    end)
+    
+    local uis = game:GetService("UserInputService")
+    uis.InputBegan:Connect(function (int, gameProcessedEvent)
+    if gameProcessedEvent then return end
+    if int.KeyCode == Enum.KeyCode.V then
+        if Horizontal.Visible == false then
+            Horizontal.Visible = true
+            Vertical.Visible = true
+        else
+            Horizontal.Visible = false
+            Vertical.Visible = false
+        end
+    end
+end)
+end)
