@@ -328,3 +328,5 @@ game:GetService("RunService").RenderStepped:Connect(function()
     end
 end)
 end)
+
+GameStats.Timer.Text = tplayback[#tplayback].time
