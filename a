@@ -293,7 +293,7 @@ local RS = game:GetService("RunService")
 	
 	RS.RenderStepped:Connect(UpdateFPS)
 	while wait(1) do
-		FPS.Text = FPS.." FPS"
+		GameStats.FPS.Text = FPS.." FPS"
 		FPS = 0
 	end
 
